@@ -9,8 +9,7 @@
 // - Henry de Valence <hdevalence@hdevalence.ca>
 
 #![no_std]
-#![cfg_attr(feature = "nightly", feature(external_doc))]
-#![cfg_attr(feature = "nightly", doc(include = "../README.md"))]
+#![doc = include_str!("../README.md")]
 #![cfg_attr(feature = "nightly", deny(missing_docs))]
 #![doc(html_root_url = "https://docs.rs/subtle-ng/2.4.1")]
 
@@ -194,7 +193,6 @@ pub trait ConstantTimeEq {
     ///
     /// * `Choice(1u8)` if `self == other`;
     /// * `Choice(0u8)` if `self != other`.
-    #[inline]
     fn ct_eq(&self, other: &Self) -> Choice;
 }
 
@@ -317,7 +315,6 @@ pub trait ConditionallySelectable: Copy {
     /// assert_eq!(z, y);
     /// # }
     /// ```
-    #[inline]
     fn conditional_select(a: &Self, b: &Self, choice: Choice) -> Self;
 
     /// Conditionally assign `other` to `self`, according to `choice`.
@@ -467,7 +464,6 @@ pub trait ConditionallyNegatable {
     /// unchanged.
     ///
     /// This function should execute in constant time.
-    #[inline]
     fn conditional_negate(&mut self, choice: Choice);
 }
 
